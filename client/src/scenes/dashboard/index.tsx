@@ -3,9 +3,17 @@ import React from "react";
 
 type Props = {};
 
+const gridTemplate=`
+"a b c "
+`
+
 const Dashboard = (props: Props) => {
   const { palette } = useTheme();
-  return <Box color={palette.grey[300]}>Dashboard</Box>;
+  return (
+    <Box width="100%" height="100%" sx={{ gridTemplateAreas: gridTemplate }}>
+      Dashboard
+    </Box>
+  );
 };
 
 export default Dashboard;
