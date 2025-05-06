@@ -1,8 +1,8 @@
 {
     "$schema": "https://json.schemastore.org/tsconfig",
     "compilerOptions": {
-      "target": "ES2022",
-      "module": "ESNext",
+      "target": "ES6",
+      "module": "CommonJS",
       "moduleResolution": "Node",
       "strict": true,
       "esModuleInterop": true,
@@ -13,12 +13,10 @@
       "outDir": "./dist",
       "rootDir": "./src",
       "noEmit": true,
-      "types": ["node"],
+      "types": ["node","jest"],
       "allowImportingTsExtensions": true,
-      "verbatimModuleSyntax": true,
       "incremental": true
     },
-    "include": ["src/**/*.ts"],
+    "include": ["src/**/*.ts","test/**/*.test.ts"],
     "exclude": ["node_modules", "dist"]
   }
-  

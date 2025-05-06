@@ -1,6 +1,4 @@
 import express from "express";
-import bodyParser from "body-parser";
-import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
@@ -18,7 +16,9 @@ app.use(cors());
 app.use(express.json());
 
 // ROUTES
-
+app.get("/", (req, res) => {
+  res.status(200).json("Welcome to Expense Tracker");
+});
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 9000;
 
@@ -32,7 +32,7 @@ const startServer = async (): Promise<void> => {
     console.error("Failed to start server");
   }
 };
-
+startServer().catch(console.error);
 process.on("SIGINT", async () => {
   try {
     await disconnectFromDB();
@@ -41,3 +41,5 @@ process.on("SIGINT", async () => {
     process.exit(1);
   }
 });
+
+export default app;
