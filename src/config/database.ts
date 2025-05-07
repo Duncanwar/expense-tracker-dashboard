@@ -15,7 +15,6 @@ const connectToDB = async (): Promise<void> => {
     process.exit(1);
   }
 };
-
 const disconnectFromDB = async (): Promise<void> => {
   await prisma.$disconnect();
   console.log("disconnected from database");

@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
 import { connectToDB, disconnectFromDB } from "./config/database";
+import route from "./routes";
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -14,7 +15,7 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(cors());
 app.use(express.json());
-
+app.use(route);
 // ROUTES
 app.get("/", (req, res) => {
   res.status(200).json("Welcome to Expense Tracker");
