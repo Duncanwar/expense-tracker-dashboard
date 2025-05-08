@@ -15,11 +15,11 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(cors());
 app.use(express.json());
-app.use(route);
 // ROUTES
 app.get("/", (req, res) => {
   res.status(200).json("Welcome to Expense Tracker");
 });
+app.use(route);
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 9000;
 

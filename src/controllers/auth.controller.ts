@@ -6,6 +6,9 @@ import Response from "../utils/response";
 export default class AuthController {
   static signup = catchAsync(async (req, res) => {
     const { fullname, email, password, photo } = req.body;
+    if (!req.body) {
+      return res.json("not present");
+    }
     const userExists = await UserService.findUserByEmail(email);
     if (userExists) {
       return Response.error(res, 400, "User already exists", {});
