@@ -37,6 +37,7 @@ startServer().catch(console.error);
 process.on("SIGINT", async () => {
   try {
     await disconnectFromDB();
+    process.exit(0);
   } catch (error) {
     console.error("Failed to disconnect from DB", error);
     process.exit(1);

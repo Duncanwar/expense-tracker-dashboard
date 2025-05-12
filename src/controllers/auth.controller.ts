@@ -2,14 +2,14 @@ import UserService from "../services/user.service";
 import catchAsync from "../utils/catchAsync";
 import { comparePassword, generateToken, hashPassword } from "../utils/helpers";
 import Response from "../utils/response";
+import { validateSignup } from "../validations/signup.validation";
 
 export default class AuthController {
-  static signup = catchAsync(async (req, res) => {
-    const { fullname, email, password, photo } = req.body;
-    if (!req.body) {
-      return res.json("not present");
-    }
+  static signup = catchAsync(async (req, res, next) => {
+    const { fullname, email, password, profile_picture } = req.body;
+    validateSignup(req, res, next);
     const userExists = await UserService.findUserByEmail(email);
+    console.log(userExists);
     if (userExists) {
       return Response.error(res, 400, "User already exists", {});
     }
@@ -19,7 +19,7 @@ export default class AuthController {
       fullname,
       password: hashedPassword,
       email,
-      photo: photo,
+      profile_picture: profile_picture,
     });
 
     return Response.success(res, 201, "User created", user);
