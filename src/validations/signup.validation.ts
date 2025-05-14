@@ -11,7 +11,6 @@ const loginSchema = joi.object({
   password: joi.string().min(6).max(20).required(),
 });
 const validateSignup = (req: Request, res: Response, next: NextFunction) => {
-  console.log(req.body);
   const { error } = signupSchema.validate(req.body);
   if (error) {
     return res.status(422).json({
@@ -28,6 +27,5 @@ const validateLogin = (req: Request, res: Response, next: NextFunction) => {
       message: error.details[0].message,
     });
   }
-  next();
 };
 export { validateSignup, validateLogin };

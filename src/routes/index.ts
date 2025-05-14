@@ -1,10 +1,11 @@
 import { Router } from "express";
 
 import auth from "./auth.route";
-// import user from "./user.route";
+import oauth from "./oauth.route";
 
 const route: Router = Router();
 
+route.use("/oath", oauth);
 route.use("/auth", auth);
 // route.use("/auth", user);
 

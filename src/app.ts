@@ -3,8 +3,11 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
+import session from "express-session";
+import grantConfig from "./grant.config";
 import { connectToDB, disconnectFromDB } from "./config/database";
 import route from "./routes";
+import grant from "grant";
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -12,6 +15,13 @@ const app = express();
 app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+app.use(
+  session({
+    secret: "grant",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 app.use(morgan("common"));
 app.use(cors());
 app.use(express.json());
@@ -19,6 +29,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.status(200).json("Welcome to Expense Tracker");
 });
+app.use(grant.express()(grantConfig));
 app.use(route);
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 9000;
