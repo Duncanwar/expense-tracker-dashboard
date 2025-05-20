@@ -9,6 +9,7 @@ import {
 
 export default class AuthController {
   static signup = catchAsync(async (req, res, next) => {
+    console.log("Signup request", req.body);
     const { fullname, email, password, profile_picture } = req.body;
     validateSignup(req, res, next);
     const userExists = await UserService.findUserByEmail(email);

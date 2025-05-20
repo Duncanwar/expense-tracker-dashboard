@@ -5,7 +5,7 @@ import oauth from "./oauth.route";
 
 const route: Router = Router();
 
-route.use("/oath", oauth);
+// route.use("/oath", oauth);
 route.use("/auth", auth);
 // route.use("/auth", user);
 

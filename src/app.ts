@@ -12,6 +12,12 @@ import grant from "grant";
 /* CONFIGURATIONS */
 dotenv.config();
 const app = express();
+app.use(
+  cors({
+    origin: true, // allow all origins
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
@@ -23,22 +29,25 @@ app.use(
   })
 );
 app.use(morgan("common"));
-app.use(cors());
-app.use(express.json());
 // ROUTES
 app.get("/", (req, res) => {
   res.status(200).json("Welcome to Expense Tracker");
+  console.log("Welcome to Expense Tracker");
+});
+app.get("/api", (req, res) => {
+  console.log("Welcome to Expense Tracker");
+  return res.status(200).json({ msg: "Welcome to Expense Tracker" });
 });
 app.use(grant.express()(grantConfig));
 app.use(route);
 /* MONGOOSE SETUP */
-const PORT = process.env.PORT || 9000;
+const PORT = process.env.PORT || 6000;
 
 const startServer = async (): Promise<void> => {
   try {
     await connectToDB();
     app.listen(PORT, () => {
-      console.log("Server started");
+      console.log("Server started", PORT);
     });
   } catch (error) {
     console.error("Failed to start server");

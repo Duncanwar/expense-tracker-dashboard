@@ -8,9 +8,13 @@ export default class OauthProfile {
   ): Promise<Maybe<FederatedIdentity>> {
     try {
       const result = await prisma.federated_Identity.findFirst({
-        where: { provider, provider_id: providerId },
+        where: {
+          provider_id: providerId,
+          provider,
+        },
       });
-      return result;
+
+      return result || null;
     } catch (error) {
       console.error("Error finding user identity:", error);
       throw new Error("Failed to find user identity");
@@ -21,7 +25,7 @@ export default class OauthProfile {
     userIdentity: Omit<FederatedIdentity, "createdAt">
   ): Promise<FederatedIdentity> {
     try {
-      console.log(userIdentity);
+      console.log(userIdentity); // Replace in production
       const result = await prisma.federated_Identity.create({
         data: {
           provider_id: userIdentity.provider_id,
