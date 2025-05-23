@@ -41,7 +41,7 @@ app.get("/api", (req, res) => {
 app.use(grant.express()(grantConfig));
 app.use(route);
 /* MONGOOSE SETUP */
-const PORT = process.env.PORT || 6000;
+const PORT = process.env.PORT || 5000;
 
 const startServer = async (): Promise<void> => {
   try {
